@@ -1,0 +1,25 @@
+.form-container {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.form-field {
+  width: 100%;
+}
+
+.date {
+  font-size: 0.5rem;
+}
+
+.task-actions {
+  margin: 0 4px;
+
+  button {
+    margin: 0 4px;
+  }
+}
+
+.checkbox {
+  margin-right: 10px;
+}

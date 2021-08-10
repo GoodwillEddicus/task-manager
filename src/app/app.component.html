@@ -1,0 +1,47 @@
+<mat-toolbar color="primary">
+  <span>Task Manager</span>
+</mat-toolbar>
+
+<div class="form-container">
+  <mat-form-field class="form-field" appearance="fill">
+    <mat-label>Title</mat-label>
+    <input matInput placeholder="Task" [formControl]="titleControl" required>
+    <mat-error *ngIf="titleControl.invalid">Please provide a title for your task</mat-error>
+  </mat-form-field>
+  <mat-form-field class="form-field" appearance="fill">
+    <mat-label>Task description</mat-label>
+    <textarea matInput [formControl]="descControl" placeholder=""></textarea>
+    <mat-error *ngIf="descControl.invalid">Please provide a description</mat-error>
+  </mat-form-field>
+  <div class="form-field">
+    <button (click)="submit()" mat-flat-button size="" color="primary">{{isEditing? 'Update':'Create'}} task</button>
+  </div>
+</div>
+
+<mat-list>
+  <div mat-subheader>My todo list:</div>
+  <mat-list-item *ngFor="let task of tasks">
+    <mat-checkbox class="checkbox" (change)="onTaskStatusChange($event, task.id!)" [(ngModel)]="task.completed">
+    </mat-checkbox>
+    <mat-chip-list>
+      <mat-chip [color]="task.completed ? 'primary' : 'accent'">
+        {{task.completed ? 'complete': 'pending'}}
+      </mat-chip>
+    </mat-chip-list>
+    <div mat-line>
+      <p>{{task.title}}</p>
+    </div>
+    <div mat-line>
+      <p class="">{{task.desc ? task.desc : 'N/A' }}</p>
+    </div>
+    <div class="task-actions">
+      <button mat-mini-fab color="primary" aria-label="delete task" (click)="edit(task)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-mini-fab color="warn" aria-label="delete task" (click)="delete(task.id!)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+    <mat-divider></mat-divider>
+  </mat-list-item>
+</mat-list>
